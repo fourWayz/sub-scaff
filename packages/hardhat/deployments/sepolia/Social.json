@@ -1,0 +1,658 @@
+{
+  "address": "0x4259bEC755f0C2DCFAcc662e1075f3DA2F986313",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "commenter",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "postId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "content",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "CommentAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "author",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "content",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "PostCreated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "liker",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "postId",
+          "type": "uint256"
+        }
+      ],
+      "name": "PostLiked",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "userAddress",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "username",
+          "type": "string"
+        }
+      ],
+      "name": "UserRegistered",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_postId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "_content",
+          "type": "string"
+        }
+      ],
+      "name": "addComment",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_content",
+          "type": "string"
+        }
+      ],
+      "name": "createPost",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_postId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_commentId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getComment",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "commenter",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "content",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_postId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getPost",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "author",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "content",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "likes",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "commentsCount",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getPostsCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_userAddress",
+          "type": "address"
+        }
+      ],
+      "name": "getUserByAddress",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "username",
+              "type": "string"
+            },
+            {
+              "internalType": "address",
+              "name": "userAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "isRegistered",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct Social.User",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_postId",
+          "type": "uint256"
+        }
+      ],
+      "name": "likePost",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "postComments",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "commenter",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "content",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "postCommentsCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "posts",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "author",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "content",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "likes",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "commentsCount",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_username",
+          "type": "string"
+        }
+      ],
+      "name": "registerUser",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "users",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "username",
+          "type": "string"
+        },
+        {
+          "internalType": "address",
+          "name": "userAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "bool",
+          "name": "isRegistered",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0xe45d4bd6fac219b811e60be5be580fa79a159a137942b21cd2172920011c7b51",
+  "receipt": {
+    "to": null,
+    "from": "0x17C103b11b0d329E9f944a455FfA36f3bd9EfB50",
+    "contractAddress": "0x4259bEC755f0C2DCFAcc662e1075f3DA2F986313",
+    "transactionIndex": 7,
+    "gasUsed": "1144964",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x5aab38083a397250e0ffe080d53fbb3b9b721caafc4e605518431ae3cd121305",
+    "transactionHash": "0xe45d4bd6fac219b811e60be5be580fa79a159a137942b21cd2172920011c7b51",
+    "logs": [],
+    "blockNumber": 6038941,
+    "cumulativeGasUsed": "1686045",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "814bf3be790d6ed1c9471be1f8441b67",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"commenter\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"postId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"content\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"CommentAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"author\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"content\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"PostCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"liker\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"postId\",\"type\":\"uint256\"}],\"name\":\"PostLiked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"userAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"username\",\"type\":\"string\"}],\"name\":\"UserRegistered\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_postId\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"_content\",\"type\":\"string\"}],\"name\":\"addComment\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_content\",\"type\":\"string\"}],\"name\":\"createPost\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_postId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_commentId\",\"type\":\"uint256\"}],\"name\":\"getComment\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"commenter\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"content\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_postId\",\"type\":\"uint256\"}],\"name\":\"getPost\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"author\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"content\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"likes\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"commentsCount\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getPostsCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_userAddress\",\"type\":\"address\"}],\"name\":\"getUserByAddress\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"username\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"userAddress\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"isRegistered\",\"type\":\"bool\"}],\"internalType\":\"struct Social.User\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_postId\",\"type\":\"uint256\"}],\"name\":\"likePost\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"postComments\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"commenter\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"content\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"postCommentsCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"posts\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"author\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"content\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"likes\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"commentsCount\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_username\",\"type\":\"string\"}],\"name\":\"registerUser\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"users\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"username\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"userAddress\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"isRegistered\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/Social.sol\":\"Social\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/Social.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\ncontract Social {\\n    // Address of the contract owner\\n    address public owner;\\n\\n    // Struct representing a user\\n    struct User {\\n        string username;\\n        address userAddress;\\n        bool isRegistered;\\n    }\\n\\n    // Mapping from user address to user details\\n    mapping(address => User) public users;\\n\\n    // Struct representing a post\\n    struct Post {\\n        address author;\\n        string content;\\n        uint256 timestamp;\\n        uint256 likes;\\n        uint256 commentsCount;\\n    }\\n\\n    // Struct representing a comment\\n    struct Comment {\\n        address commenter;\\n        string content;\\n        uint256 timestamp;\\n    }\\n\\n    // Mapping from post ID to comment ID to comment details\\n    mapping(uint256 => mapping(uint256 => Comment)) public postComments;\\n\\n    // Mapping from post ID to count of comments\\n    mapping(uint256 => uint256) public postCommentsCount;\\n\\n    // Array to store all posts\\n    Post[] public posts;\\n\\n    // Event emitted when a user is registered\\n    event UserRegistered(address indexed userAddress, string username);\\n\\n    // Event emitted when a post is created\\n    event PostCreated(address indexed author, string content, uint256 timestamp);\\n\\n    // Event emitted when a post is liked\\n    event PostLiked(address indexed liker, uint256 indexed postId);\\n\\n    // Event emitted when a comment is added\\n    event CommentAdded(address indexed commenter, uint256 indexed postId, string content, uint256 timestamp);\\n\\n    // Modifier to restrict function access to registered users\\n    modifier onlyRegisteredUser() {\\n        require(users[msg.sender].isRegistered, \\\"User is not registered\\\");\\n        _;\\n    }\\n\\n    // Modifier to restrict function access to the owner\\n    modifier onlyOwner() {\\n        require(msg.sender == owner, \\\"Only owner can call this function\\\");\\n        _;\\n    }\\n\\n    // Constructor to set the owner of the contract to the deployer\\n    constructor() {\\n        owner = msg.sender;\\n    }\\n\\n    // Function to register a new user\\n    function registerUser(string memory _username) external {\\n        require(!users[msg.sender].isRegistered, \\\"User is already registered\\\");\\n        require(bytes(_username).length > 0, \\\"Username should not be empty\\\");\\n\\n        users[msg.sender] = User({\\n            username: _username,\\n            userAddress: msg.sender,\\n            isRegistered: true\\n        });\\n\\n        emit UserRegistered(msg.sender, _username);\\n    }\\n\\n    // Function to get user details by address\\n    function getUserByAddress(address _userAddress) external view returns (User memory) {\\n        require(users[_userAddress].isRegistered, \\\"User not found\\\");\\n        return users[_userAddress];\\n    }\\n\\n    // Function to create a new post\\n    function createPost(string memory _content) external onlyRegisteredUser {\\n        require(bytes(_content).length > 0, \\\"Content should not be empty\\\");\\n\\n        posts.push(Post({\\n            author: msg.sender,\\n            content: _content,\\n            timestamp: block.timestamp,\\n            likes: 0,\\n            commentsCount: 0\\n        }));\\n\\n        emit PostCreated(msg.sender, _content, block.timestamp);\\n    }\\n\\n    // Function to like a post\\n    function likePost(uint256 _postId) external onlyRegisteredUser {\\n        require(_postId < posts.length, \\\"Post does not exist\\\");\\n\\n        Post storage post = posts[_postId];\\n        post.likes++;\\n\\n        emit PostLiked(msg.sender, _postId);\\n    }\\n\\n    // Function to add a comment to a post\\n    function addComment(uint256 _postId, string memory _content) external onlyRegisteredUser {\\n        require(_postId < posts.length, \\\"Post does not exist\\\");\\n        require(bytes(_content).length > 0, \\\"Comment should not be empty\\\");\\n\\n        uint256 commentId = postCommentsCount[_postId];\\n        postComments[_postId][commentId] = Comment({\\n            commenter: msg.sender,\\n            content: _content,\\n            timestamp: block.timestamp\\n        });\\n\\n        postCommentsCount[_postId]++;\\n        posts[_postId].commentsCount++;\\n\\n        emit CommentAdded(msg.sender, _postId, _content, block.timestamp);\\n    }\\n\\n    // Function to get the count of posts\\n    function getPostsCount() external view returns (uint256) {\\n        return posts.length;\\n    }\\n\\n    // Function to get details of a specific post\\n    function getPost(uint256 _postId) external view returns (\\n        address author,\\n        string memory content,\\n        uint256 timestamp,\\n        uint256 likes,\\n        uint256 commentsCount\\n    ) {\\n        require(_postId < posts.length, \\\"Post does not exist\\\");\\n        Post memory post = posts[_postId];\\n        return (post.author, post.content, post.timestamp, post.likes, post.commentsCount);\\n    }\\n\\n    // Function to get details of a specific comment on a post\\n    function getComment(uint256 _postId, uint256 _commentId) external view returns (\\n        address commenter,\\n        string memory content,\\n        uint256 timestamp\\n    ) {\\n        require(_postId < posts.length, \\\"Post does not exist\\\");\\n        require(_commentId < postCommentsCount[_postId], \\\"Comment does not exist\\\");\\n\\n        Comment memory comment = postComments[_postId][_commentId];\\n        return (comment.commenter, comment.content, comment.timestamp);\\n    }\\n}\\n\",\"keccak256\":\"0x895bb8e895cdb50f13dccea9ae7a86057597a8a8aee5a1a4427e12255e03a419\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50600080546001600160a01b03191633179055611357806100326000396000f3fe608060405234801561001057600080fd5b50600436106100cf5760003560e01c8063725009d31161008c578063a87430ba11610066578063a87430ba146101ce578063aa7e5683146101f0578063c7303c6114610203578063d82d72bf1461021657600080fd5b8063725009d31461017e57806383624882146101915780638da5cb5b146101a357600080fd5b80630b1e7f83146100d457806340731c241461010157806348892753146101145780635193c94c1461013657806369c212f614610149578063704f1b9414610169575b600080fd5b6100e76100e2366004610e40565b610236565b6040516100f8959493929190610e9f565b60405180910390f35b6100e761010f366004610e40565b61030a565b610127610122366004610ee0565b610464565b6040516100f893929190610f02565b610127610144366004610ee0565b6105d2565b61015c610157366004610f36565b610692565b6040516100f89190610f66565b61017c610177366004611052565b6107f4565b005b61017c61018c366004610e40565b61095e565b6004545b6040519081526020016100f8565b6000546101b6906001600160a01b031681565b6040516001600160a01b0390911681526020016100f8565b6101e16101dc366004610f36565b610a29565b6040516100f89392919061108f565b61017c6101fe3660046110c2565b610ae3565b61017c610211366004611052565b610ca5565b610195610224366004610e40565b60036020526000908152604090205481565b6004818154811061024657600080fd5b6000918252602090912060059091020180546001820180546001600160a01b0390921693509061027590611109565b80601f01602080910402602001604051908101604052809291908181526020018280546102a190611109565b80156102ee5780601f106102c3576101008083540402835291602001916102ee565b820191906000526020600020905b8154815290600101906020018083116102d157829003601f168201915b5050505050908060020154908060030154908060040154905085565b60006060600080600060048054905086106103405760405162461bcd60e51b815260040161033790611143565b60405180910390fd5b60006004878154811061035557610355611170565b60009182526020918290206040805160a0810190915260059092020180546001600160a01b03168252600181018054929391929184019161039590611109565b80601f01602080910402602001604051908101604052809291908181526020018280546103c190611109565b801561040e5780601f106103e35761010080835404028352916020019161040e565b820191906000526020600020905b8154815290600101906020018083116103f157829003601f168201915b505050505081526020016002820154815260200160038201548152602001600482015481525050905080600001518160200151826040015183606001518460800151955095509550955095505091939590929450565b600060606000600480549050851061048e5760405162461bcd60e51b815260040161033790611143565b60008581526003602052604090205484106104e45760405162461bcd60e51b815260206004820152601660248201527510dbdb5b595b9d08191bd95cc81b9bdd08195e1a5cdd60521b6044820152606401610337565b6000858152600260209081526040808320878452825280832081516060810190925280546001600160a01b03168252600181018054929391929184019161052a90611109565b80601f016020809104026020016040519081016040528092919081815260200182805461055690611109565b80156105a35780601f10610578576101008083540402835291602001916105a3565b820191906000526020600020905b81548152906001019060200180831161058657829003601f168201915b505050918352505060029190910154602091820152815190820151604090920151909891975095509350505050565b6002602090815260009283526040808420909152908252902080546001820180546001600160a01b03909216929161060990611109565b80601f016020809104026020016040519081016040528092919081815260200182805461063590611109565b80156106825780601f1061065757610100808354040283529160200191610682565b820191906000526020600020905b81548152906001019060200180831161066557829003601f168201915b5050505050908060020154905083565b60408051606080820183528152600060208201819052918101919091526001600160a01b03821660009081526001602081905260409091200154600160a01b900460ff166107135760405162461bcd60e51b815260206004820152600e60248201526d155cd95c881b9bdd08199bdd5b9960921b6044820152606401610337565b6001600160a01b0382166000908152600160205260409081902081516060810190925280548290829061074590611109565b80601f016020809104026020016040519081016040528092919081815260200182805461077190611109565b80156107be5780601f10610793576101008083540402835291602001916107be565b820191906000526020600020905b8154815290600101906020018083116107a157829003601f168201915b5050509183525050600191909101546001600160a01b0381166020830152600160a01b900460ff16151560409091015292915050565b3360009081526001602081905260409091200154600160a01b900460ff161561085f5760405162461bcd60e51b815260206004820152601a60248201527f5573657220697320616c726561647920726567697374657265640000000000006044820152606401610337565b60008151116108b05760405162461bcd60e51b815260206004820152601c60248201527f557365726e616d652073686f756c64206e6f7420626520656d707479000000006044820152606401610337565b6040805160608101825282815233602080830182905260018385018190526000928352905291909120815181906108e790826111d5565b506020820151600190910180546040938401511515600160a01b026001600160a81b03199091166001600160a01b03909316929092179190911790555133907f48cac28ad4dc618e15f4c2dd5e97751182f166de97b25618318b2112aa951a2f90610953908490611295565b60405180910390a250565b3360009081526001602081905260409091200154600160a01b900460ff166109985760405162461bcd60e51b8152600401610337906112a8565b60045481106109b95760405162461bcd60e51b815260040161033790611143565b6000600482815481106109ce576109ce611170565b906000526020600020906005020190508060030160008154809291906109f3906112d8565b9091555050604051829033907f62500381f39eb6f48b6e6f104021ceeaca9e5354918dc17b4a15bf87c5f5d28b90600090a35050565b600160205260009081526040902080548190610a4490611109565b80601f0160208091040260200160405190810160405280929190818152602001828054610a7090611109565b8015610abd5780601f10610a9257610100808354040283529160200191610abd565b820191906000526020600020905b815481529060010190602001808311610aa057829003601f168201915b505050600190930154919250506001600160a01b0381169060ff600160a01b9091041683565b3360009081526001602081905260409091200154600160a01b900460ff16610b1d5760405162461bcd60e51b8152600401610337906112a8565b6004548210610b3e5760405162461bcd60e51b815260040161033790611143565b6000815111610b8f5760405162461bcd60e51b815260206004820152601b60248201527f436f6d6d656e742073686f756c64206e6f7420626520656d70747900000000006044820152606401610337565b600082815260036020908152604080832054815160608101835233815280840186815242828501528786526002855283862083875290945291909320815181546001600160a01b0319166001600160a01b0390911617815591519091906001820190610bfb90826111d5565b5060409182015160029091015560008481526003602052908120805491610c21836112d8565b919050555060048381548110610c3957610c39611170565b600091825260208220600460059092020101805491610c57836112d8565b919050555082336001600160a01b03167fdb68d60a2d5659f0528e369fe9a8cfdbec13beb23609aa9a7a5c2a2d973117e48442604051610c989291906112ff565b60405180910390a3505050565b3360009081526001602081905260409091200154600160a01b900460ff16610cdf5760405162461bcd60e51b8152600401610337906112a8565b6000815111610d305760405162461bcd60e51b815260206004820152601b60248201527f436f6e74656e742073686f756c64206e6f7420626520656d70747900000000006044820152606401610337565b6040805160a0810182523381526020810183815242928201929092526000606082018190526080820181905260048054600181018255915281517f8a35acfbc15ff81a39ae7d344fd709f28e8600b4aa8c65c6b64bfe7fe36bd19b600590920291820180546001600160a01b0319166001600160a01b0390921691909117815592519192917f8a35acfbc15ff81a39ae7d344fd709f28e8600b4aa8c65c6b64bfe7fe36bd19c90910190610de490826111d5565b506040820151816002015560608201518160030155608082015181600401555050336001600160a01b03167fb5a2d6ecdc9bd09637c1de2e8e02011abe041770e16737ec2adfa54c8e0581c782426040516109539291906112ff565b600060208284031215610e5257600080fd5b5035919050565b6000815180845260005b81811015610e7f57602081850181015186830182015201610e63565b506000602082860101526020601f19601f83011685010191505092915050565b6001600160a01b038616815260a060208201819052600090610ec390830187610e59565b604083019590955250606081019290925260809091015292915050565b60008060408385031215610ef357600080fd5b50508035926020909101359150565b6001600160a01b0384168152606060208201819052600090610f2690830185610e59565b9050826040830152949350505050565b600060208284031215610f4857600080fd5b81356001600160a01b0381168114610f5f57600080fd5b9392505050565b602081526000825160606020840152610f826080840182610e59565b60208501516001600160a01b03166040858101919091529094015115156060909301929092525090919050565b634e487b7160e01b600052604160045260246000fd5b600082601f830112610fd657600080fd5b813567ffffffffffffffff80821115610ff157610ff1610faf565b604051601f8301601f19908116603f0116810190828211818310171561101957611019610faf565b8160405283815286602085880101111561103257600080fd5b836020870160208301376000602085830101528094505050505092915050565b60006020828403121561106457600080fd5b813567ffffffffffffffff81111561107b57600080fd5b61108784828501610fc5565b949350505050565b6060815260006110a26060830186610e59565b6001600160a01b0394909416602083015250901515604090910152919050565b600080604083850312156110d557600080fd5b82359150602083013567ffffffffffffffff8111156110f357600080fd5b6110ff85828601610fc5565b9150509250929050565b600181811c9082168061111d57607f821691505b60208210810361113d57634e487b7160e01b600052602260045260246000fd5b50919050565b602080825260139082015272141bdcdd08191bd95cc81b9bdd08195e1a5cdd606a1b604082015260600190565b634e487b7160e01b600052603260045260246000fd5b601f8211156111d057600081815260208120601f850160051c810160208610156111ad5750805b601f850160051c820191505b818110156111cc578281556001016111b9565b5050505b505050565b815167ffffffffffffffff8111156111ef576111ef610faf565b611203816111fd8454611109565b84611186565b602080601f83116001811461123857600084156112205750858301515b600019600386901b1c1916600185901b1785556111cc565b600085815260208120601f198616915b8281101561126757888601518255948401946001909101908401611248565b50858210156112855787850151600019600388901b60f8161c191681555b5050505050600190811b01905550565b602081526000610f5f6020830184610e59565b602080825260169082015275155cd95c881a5cc81b9bdd081c9959da5cdd195c995960521b604082015260600190565b6000600182016112f857634e487b7160e01b600052601160045260246000fd5b5060010190565b6040815260006113126040830185610e59565b9050826020830152939250505056fea2646970667358221220ec3c366fc8a1a7ffe589d47cb8ff9b955708b6dbeab630dec873cb01960c1ce964736f6c63430008110033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100cf5760003560e01c8063725009d31161008c578063a87430ba11610066578063a87430ba146101ce578063aa7e5683146101f0578063c7303c6114610203578063d82d72bf1461021657600080fd5b8063725009d31461017e57806383624882146101915780638da5cb5b146101a357600080fd5b80630b1e7f83146100d457806340731c241461010157806348892753146101145780635193c94c1461013657806369c212f614610149578063704f1b9414610169575b600080fd5b6100e76100e2366004610e40565b610236565b6040516100f8959493929190610e9f565b60405180910390f35b6100e761010f366004610e40565b61030a565b610127610122366004610ee0565b610464565b6040516100f893929190610f02565b610127610144366004610ee0565b6105d2565b61015c610157366004610f36565b610692565b6040516100f89190610f66565b61017c610177366004611052565b6107f4565b005b61017c61018c366004610e40565b61095e565b6004545b6040519081526020016100f8565b6000546101b6906001600160a01b031681565b6040516001600160a01b0390911681526020016100f8565b6101e16101dc366004610f36565b610a29565b6040516100f89392919061108f565b61017c6101fe3660046110c2565b610ae3565b61017c610211366004611052565b610ca5565b610195610224366004610e40565b60036020526000908152604090205481565b6004818154811061024657600080fd5b6000918252602090912060059091020180546001820180546001600160a01b0390921693509061027590611109565b80601f01602080910402602001604051908101604052809291908181526020018280546102a190611109565b80156102ee5780601f106102c3576101008083540402835291602001916102ee565b820191906000526020600020905b8154815290600101906020018083116102d157829003601f168201915b5050505050908060020154908060030154908060040154905085565b60006060600080600060048054905086106103405760405162461bcd60e51b815260040161033790611143565b60405180910390fd5b60006004878154811061035557610355611170565b60009182526020918290206040805160a0810190915260059092020180546001600160a01b03168252600181018054929391929184019161039590611109565b80601f01602080910402602001604051908101604052809291908181526020018280546103c190611109565b801561040e5780601f106103e35761010080835404028352916020019161040e565b820191906000526020600020905b8154815290600101906020018083116103f157829003601f168201915b505050505081526020016002820154815260200160038201548152602001600482015481525050905080600001518160200151826040015183606001518460800151955095509550955095505091939590929450565b600060606000600480549050851061048e5760405162461bcd60e51b815260040161033790611143565b60008581526003602052604090205484106104e45760405162461bcd60e51b815260206004820152601660248201527510dbdb5b595b9d08191bd95cc81b9bdd08195e1a5cdd60521b6044820152606401610337565b6000858152600260209081526040808320878452825280832081516060810190925280546001600160a01b03168252600181018054929391929184019161052a90611109565b80601f016020809104026020016040519081016040528092919081815260200182805461055690611109565b80156105a35780601f10610578576101008083540402835291602001916105a3565b820191906000526020600020905b81548152906001019060200180831161058657829003601f168201915b505050918352505060029190910154602091820152815190820151604090920151909891975095509350505050565b6002602090815260009283526040808420909152908252902080546001820180546001600160a01b03909216929161060990611109565b80601f016020809104026020016040519081016040528092919081815260200182805461063590611109565b80156106825780601f1061065757610100808354040283529160200191610682565b820191906000526020600020905b81548152906001019060200180831161066557829003601f168201915b5050505050908060020154905083565b60408051606080820183528152600060208201819052918101919091526001600160a01b03821660009081526001602081905260409091200154600160a01b900460ff166107135760405162461bcd60e51b815260206004820152600e60248201526d155cd95c881b9bdd08199bdd5b9960921b6044820152606401610337565b6001600160a01b0382166000908152600160205260409081902081516060810190925280548290829061074590611109565b80601f016020809104026020016040519081016040528092919081815260200182805461077190611109565b80156107be5780601f10610793576101008083540402835291602001916107be565b820191906000526020600020905b8154815290600101906020018083116107a157829003601f168201915b5050509183525050600191909101546001600160a01b0381166020830152600160a01b900460ff16151560409091015292915050565b3360009081526001602081905260409091200154600160a01b900460ff161561085f5760405162461bcd60e51b815260206004820152601a60248201527f5573657220697320616c726561647920726567697374657265640000000000006044820152606401610337565b60008151116108b05760405162461bcd60e51b815260206004820152601c60248201527f557365726e616d652073686f756c64206e6f7420626520656d707479000000006044820152606401610337565b6040805160608101825282815233602080830182905260018385018190526000928352905291909120815181906108e790826111d5565b506020820151600190910180546040938401511515600160a01b026001600160a81b03199091166001600160a01b03909316929092179190911790555133907f48cac28ad4dc618e15f4c2dd5e97751182f166de97b25618318b2112aa951a2f90610953908490611295565b60405180910390a250565b3360009081526001602081905260409091200154600160a01b900460ff166109985760405162461bcd60e51b8152600401610337906112a8565b60045481106109b95760405162461bcd60e51b815260040161033790611143565b6000600482815481106109ce576109ce611170565b906000526020600020906005020190508060030160008154809291906109f3906112d8565b9091555050604051829033907f62500381f39eb6f48b6e6f104021ceeaca9e5354918dc17b4a15bf87c5f5d28b90600090a35050565b600160205260009081526040902080548190610a4490611109565b80601f0160208091040260200160405190810160405280929190818152602001828054610a7090611109565b8015610abd5780601f10610a9257610100808354040283529160200191610abd565b820191906000526020600020905b815481529060010190602001808311610aa057829003601f168201915b505050600190930154919250506001600160a01b0381169060ff600160a01b9091041683565b3360009081526001602081905260409091200154600160a01b900460ff16610b1d5760405162461bcd60e51b8152600401610337906112a8565b6004548210610b3e5760405162461bcd60e51b815260040161033790611143565b6000815111610b8f5760405162461bcd60e51b815260206004820152601b60248201527f436f6d6d656e742073686f756c64206e6f7420626520656d70747900000000006044820152606401610337565b600082815260036020908152604080832054815160608101835233815280840186815242828501528786526002855283862083875290945291909320815181546001600160a01b0319166001600160a01b0390911617815591519091906001820190610bfb90826111d5565b5060409182015160029091015560008481526003602052908120805491610c21836112d8565b919050555060048381548110610c3957610c39611170565b600091825260208220600460059092020101805491610c57836112d8565b919050555082336001600160a01b03167fdb68d60a2d5659f0528e369fe9a8cfdbec13beb23609aa9a7a5c2a2d973117e48442604051610c989291906112ff565b60405180910390a3505050565b3360009081526001602081905260409091200154600160a01b900460ff16610cdf5760405162461bcd60e51b8152600401610337906112a8565b6000815111610d305760405162461bcd60e51b815260206004820152601b60248201527f436f6e74656e742073686f756c64206e6f7420626520656d70747900000000006044820152606401610337565b6040805160a0810182523381526020810183815242928201929092526000606082018190526080820181905260048054600181018255915281517f8a35acfbc15ff81a39ae7d344fd709f28e8600b4aa8c65c6b64bfe7fe36bd19b600590920291820180546001600160a01b0319166001600160a01b0390921691909117815592519192917f8a35acfbc15ff81a39ae7d344fd709f28e8600b4aa8c65c6b64bfe7fe36bd19c90910190610de490826111d5565b506040820151816002015560608201518160030155608082015181600401555050336001600160a01b03167fb5a2d6ecdc9bd09637c1de2e8e02011abe041770e16737ec2adfa54c8e0581c782426040516109539291906112ff565b600060208284031215610e5257600080fd5b5035919050565b6000815180845260005b81811015610e7f57602081850181015186830182015201610e63565b506000602082860101526020601f19601f83011685010191505092915050565b6001600160a01b038616815260a060208201819052600090610ec390830187610e59565b604083019590955250606081019290925260809091015292915050565b60008060408385031215610ef357600080fd5b50508035926020909101359150565b6001600160a01b0384168152606060208201819052600090610f2690830185610e59565b9050826040830152949350505050565b600060208284031215610f4857600080fd5b81356001600160a01b0381168114610f5f57600080fd5b9392505050565b602081526000825160606020840152610f826080840182610e59565b60208501516001600160a01b03166040858101919091529094015115156060909301929092525090919050565b634e487b7160e01b600052604160045260246000fd5b600082601f830112610fd657600080fd5b813567ffffffffffffffff80821115610ff157610ff1610faf565b604051601f8301601f19908116603f0116810190828211818310171561101957611019610faf565b8160405283815286602085880101111561103257600080fd5b836020870160208301376000602085830101528094505050505092915050565b60006020828403121561106457600080fd5b813567ffffffffffffffff81111561107b57600080fd5b61108784828501610fc5565b949350505050565b6060815260006110a26060830186610e59565b6001600160a01b0394909416602083015250901515604090910152919050565b600080604083850312156110d557600080fd5b82359150602083013567ffffffffffffffff8111156110f357600080fd5b6110ff85828601610fc5565b9150509250929050565b600181811c9082168061111d57607f821691505b60208210810361113d57634e487b7160e01b600052602260045260246000fd5b50919050565b602080825260139082015272141bdcdd08191bd95cc81b9bdd08195e1a5cdd606a1b604082015260600190565b634e487b7160e01b600052603260045260246000fd5b601f8211156111d057600081815260208120601f850160051c810160208610156111ad5750805b601f850160051c820191505b818110156111cc578281556001016111b9565b5050505b505050565b815167ffffffffffffffff8111156111ef576111ef610faf565b611203816111fd8454611109565b84611186565b602080601f83116001811461123857600084156112205750858301515b600019600386901b1c1916600185901b1785556111cc565b600085815260208120601f198616915b8281101561126757888601518255948401946001909101908401611248565b50858210156112855787850151600019600388901b60f8161c191681555b5050505050600190811b01905550565b602081526000610f5f6020830184610e59565b602080825260169082015275155cd95c881a5cc81b9bdd081c9959da5cdd195c995960521b604082015260600190565b6000600182016112f857634e487b7160e01b600052601160045260246000fd5b5060010190565b6040815260006113126040830185610e59565b9050826020830152939250505056fea2646970667358221220ec3c366fc8a1a7ffe589d47cb8ff9b955708b6dbeab630dec873cb01960c1ce964736f6c63430008110033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 3,
+        "contract": "contracts/Social.sol:Social",
+        "label": "owner",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 15,
+        "contract": "contracts/Social.sol:Social",
+        "label": "users",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_mapping(t_address,t_struct(User)10_storage)"
+      },
+      {
+        "astId": 40,
+        "contract": "contracts/Social.sol:Social",
+        "label": "postComments",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_mapping(t_uint256,t_mapping(t_uint256,t_struct(Comment)33_storage))"
+      },
+      {
+        "astId": 44,
+        "contract": "contracts/Social.sol:Social",
+        "label": "postCommentsCount",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_mapping(t_uint256,t_uint256)"
+      },
+      {
+        "astId": 48,
+        "contract": "contracts/Social.sol:Social",
+        "label": "posts",
+        "offset": 0,
+        "slot": "4",
+        "type": "t_array(t_struct(Post)26_storage)dyn_storage"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_array(t_struct(Post)26_storage)dyn_storage": {
+        "base": "t_struct(Post)26_storage",
+        "encoding": "dynamic_array",
+        "label": "struct Social.Post[]",
+        "numberOfBytes": "32"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_mapping(t_address,t_struct(User)10_storage)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => struct Social.User)",
+        "numberOfBytes": "32",
+        "value": "t_struct(User)10_storage"
+      },
+      "t_mapping(t_uint256,t_mapping(t_uint256,t_struct(Comment)33_storage))": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => mapping(uint256 => struct Social.Comment))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_uint256,t_struct(Comment)33_storage)"
+      },
+      "t_mapping(t_uint256,t_struct(Comment)33_storage)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => struct Social.Comment)",
+        "numberOfBytes": "32",
+        "value": "t_struct(Comment)33_storage"
+      },
+      "t_mapping(t_uint256,t_uint256)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => uint256)",
+        "numberOfBytes": "32",
+        "value": "t_uint256"
+      },
+      "t_string_storage": {
+        "encoding": "bytes",
+        "label": "string",
+        "numberOfBytes": "32"
+      },
+      "t_struct(Comment)33_storage": {
+        "encoding": "inplace",
+        "label": "struct Social.Comment",
+        "members": [
+          {
+            "astId": 28,
+            "contract": "contracts/Social.sol:Social",
+            "label": "commenter",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address"
+          },
+          {
+            "astId": 30,
+            "contract": "contracts/Social.sol:Social",
+            "label": "content",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 32,
+            "contract": "contracts/Social.sol:Social",
+            "label": "timestamp",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256"
+          }
+        ],
+        "numberOfBytes": "96"
+      },
+      "t_struct(Post)26_storage": {
+        "encoding": "inplace",
+        "label": "struct Social.Post",
+        "members": [
+          {
+            "astId": 17,
+            "contract": "contracts/Social.sol:Social",
+            "label": "author",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address"
+          },
+          {
+            "astId": 19,
+            "contract": "contracts/Social.sol:Social",
+            "label": "content",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 21,
+            "contract": "contracts/Social.sol:Social",
+            "label": "timestamp",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 23,
+            "contract": "contracts/Social.sol:Social",
+            "label": "likes",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 25,
+            "contract": "contracts/Social.sol:Social",
+            "label": "commentsCount",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_uint256"
+          }
+        ],
+        "numberOfBytes": "160"
+      },
+      "t_struct(User)10_storage": {
+        "encoding": "inplace",
+        "label": "struct Social.User",
+        "members": [
+          {
+            "astId": 5,
+            "contract": "contracts/Social.sol:Social",
+            "label": "username",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 7,
+            "contract": "contracts/Social.sol:Social",
+            "label": "userAddress",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address"
+          },
+          {
+            "astId": 9,
+            "contract": "contracts/Social.sol:Social",
+            "label": "isRegistered",
+            "offset": 20,
+            "slot": "1",
+            "type": "t_bool"
+          }
+        ],
+        "numberOfBytes": "64"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}
