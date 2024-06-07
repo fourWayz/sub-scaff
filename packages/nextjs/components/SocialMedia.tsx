@@ -47,7 +47,7 @@ const SocialMedia = () => {
   // fetch registered user onMount
   useEffect(() => {
     fetchRegisteredUser();
-  }, [address, registeredUser]);
+  });
 
   /**
    * Registers a new user.
