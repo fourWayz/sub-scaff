@@ -150,6 +150,10 @@ contract Social {
         return (post.author, post.content, post.timestamp, post.likes, post.commentsCount);
     }
 
+	function getAllPosts() external view returns (Post[] memory){
+		return posts;
+	}
+
     // Function to get details of a specific comment on a post
     function getComment(uint256 _postId, uint256 _commentId) external view returns (
         address commenter,
