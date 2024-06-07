@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   11155111: {
     Social: {
-      address: "0x4259bEC755f0C2DCFAcc662e1075f3DA2F986313",
+      address: "0xB52fC2785a71693D895A81576990414A59E40780",
       abi: [
         {
           inputs: [],
@@ -137,6 +137,46 @@ const deployedContracts = {
           name: "createPost",
           outputs: [],
           stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getAllPosts",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "address",
+                  name: "author",
+                  type: "address",
+                },
+                {
+                  internalType: "string",
+                  name: "content",
+                  type: "string",
+                },
+                {
+                  internalType: "uint256",
+                  name: "timestamp",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "likes",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "commentsCount",
+                  type: "uint256",
+                },
+              ],
+              internalType: "struct Social.Post[]",
+              name: "",
+              type: "tuple[]",
+            },
+          ],
+          stateMutability: "view",
           type: "function",
         },
         {
