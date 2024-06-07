@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ethers } from "ethers";
 import Swal from "sweetalert2";
 import { useAccount } from "wagmi";
@@ -45,10 +45,6 @@ const SocialMedia = () => {
 
   const { address } = useAccount();
   // const router = useRouter()
-
-  useEffect(() => {
-    getPosts();
-  }, [PostsCount, address]);
 
   useEffect(() => {
     setRegisteredUser(address);
@@ -106,12 +102,13 @@ const SocialMedia = () => {
   /**
    * Fetches all posts from the contract.
    */
-  const getPosts = async () => {
+  const getPosts = useCallback(async () => {
     try {
       const provider = new ethers.providers.Web3Provider(wallet);
       const signer = provider.getSigner();
       const contract = new ethers.Contract(contractAddress, contractABI, signer);
       const count = await contract.getPostsCount();
+      // setPostsCount(count);
       const fetchedPosts = [];
       for (let i = 0; i < count; i++) {
         const post = await contract.getPost(i);
@@ -127,7 +124,11 @@ const SocialMedia = () => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [contractABI, contractAddress, wallet]);
+
+  useEffect(() => {
+    getPosts();
+  }, [PostsCount, address, getPosts]);
 
   /**
    * Likes a post.
