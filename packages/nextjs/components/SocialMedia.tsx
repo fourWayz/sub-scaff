@@ -124,7 +124,7 @@ const SocialMedia = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [contractABI, contractAddress, wallet]);
+  }, [contractABI, contractAddress]);
 
   useEffect(() => {
     getPosts();
