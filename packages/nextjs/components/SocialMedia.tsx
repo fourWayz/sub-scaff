@@ -49,7 +49,7 @@ const SocialMedia = () => {
   useEffect(() => {
     setRegisteredUser(address);
     setIsLoading(false);
-  }, [address]);
+  });
 
   /**
    * Registers a new user.
