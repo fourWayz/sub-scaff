@@ -17,11 +17,10 @@ if (typeof window !== "undefined") {
 const SocialMedia = () => {
   const [username, setUsername] = useState("");
   const [content, setContent] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
   const [posts, setPosts] = useState<any>([]);
-  // const [postsCount, setPostsCount] = useState<any>([]);
   const [registeredUser, setRegisteredUser] = useState<undefined | string>(undefined);
   const [commentText, setCommentText] = useState<{ [key: number]: string }>({}); // State for comment text
+
   // const contractABI = deployedContracts[31337].Social.abi; // hardhat
   // const contractAddress = deployedContracts[31337].Social.address; // hardhat
 
@@ -44,12 +43,11 @@ const SocialMedia = () => {
   });
 
   const { address } = useAccount();
-  // const router = useRouter()
 
+  // fetch registered user onMount
   useEffect(() => {
-    setRegisteredUser(address);
-    setIsLoading(false);
-  }, [address, isLoading]);
+    fetchRegisteredUser();
+  }, [address, registeredUser]);
 
   /**
    * Registers a new user.
@@ -70,6 +68,24 @@ const SocialMedia = () => {
       });
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  /**
+   * Retrieve current user.
+   */
+
+  const fetchRegisteredUser = async function () {
+    if (address) {
+      try {
+        const provider = new ethers.providers.Web3Provider(wallet);
+        const signer = provider.getSigner();
+        const contract = new ethers.Contract(contractAddress, contractABI, signer);
+        const user = await contract.getUserByAddress(address.toString());
+        setRegisteredUser(user);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -235,7 +251,7 @@ const SocialMedia = () => {
                   onChange={e => setUsername(e.target.value)}
                 />
               </div>
-              <button className="bg-blue-500 text-white px-4 py-2 rounded-lg" onClick={Register} disabled={isLoading}>
+              <button className="bg-blue-500 text-white px-4 py-2 rounded-lg" onClick={Register}>
                 Register
               </button>
             </div>
@@ -258,7 +274,7 @@ const SocialMedia = () => {
                   onChange={e => setContent(e.target.value)}
                 ></textarea>
               </div>
-              <button className="bg-blue-500 text-white px-4 py-2 rounded-lg" onClick={CreatePost} disabled={isLoading}>
+              <button className="bg-blue-500 text-white px-4 py-2 rounded-lg" onClick={CreatePost}>
                 Create Post
               </button>
             </div>
