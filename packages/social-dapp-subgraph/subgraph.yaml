@@ -1,0 +1,35 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Social
+    network: sepolia
+    source:
+      address: "0xB52fC2785a71693D895A81576990414A59E40780"
+      abi: Social
+      startBlock: 6054969
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - CommentAdded
+        - PostCreated
+        - PostLiked
+        - UserRegistered
+      abis:
+        - name: Social
+          file: ./abis/Social.json
+      eventHandlers:
+        - event: CommentAdded(indexed address,indexed uint256,string,uint256)
+          handler: handleCommentAdded
+        - event: PostCreated(indexed address,string,uint256)
+          handler: handlePostCreated
+        - event: PostLiked(indexed address,indexed uint256)
+          handler: handlePostLiked
+        - event: UserRegistered(indexed address,string)
+          handler: handleUserRegistered
+      file: ./src/social.ts
