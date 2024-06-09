@@ -284,7 +284,7 @@ const SocialMedia = () => {
 
       {/* post section */}
       <div className="mt-3" style={{ margin: "20px" }}>
-        <h3 className="text-2xl font-semibold mb-4">Posts</h3>
+        <h3 className="text-2xl font-semibold mb-4">All Posts</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {posts.map((post: any, index: number) => (
             <div className="mb-3" key={index}>

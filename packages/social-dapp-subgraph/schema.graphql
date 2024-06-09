@@ -17,6 +17,7 @@ type PostCreated @entity(immutable: true) {
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
+  comments: [Comment!]! @derivedFrom(field: "PostCreated")
 }
 
 type PostLiked @entity(immutable: true) {
