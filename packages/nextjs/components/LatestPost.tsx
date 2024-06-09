@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { FaCalendarAlt, FaRegComment, FaUser } from "react-icons/fa";
 
@@ -41,7 +42,7 @@ const LatestPost = () => {
       .catch(error => {
         console.error("Error fetching data:", error);
       });
-  }, []);
+  });
 
   return (
     <div className="mt-3" style={{ margin: "20px" }}>
@@ -50,9 +51,11 @@ const LatestPost = () => {
         {latestPosts?.map((post: any, index: number) => (
           <div className="mb-3" key={index}>
             <div className="bg-white shadow rounded-lg p-4">
-              <img
+              <Image
                 src={`https://picsum.photos/seed/${post.id}/300/200`}
                 alt="Random"
+                width={300}
+                height={300}
                 className="w-full h-40 object-cover rounded mb-4"
               />
               <div className="mb-4 flex items-center">
