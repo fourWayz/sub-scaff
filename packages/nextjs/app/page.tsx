@@ -8,8 +8,8 @@ const Home: NextPage = () => {
   return (
     <>
       <div className="flex items-center flex-col flex-grow pt-10">
-        <SocialMedia />
         <LatestPost />
+        <SocialMedia />
       </div>
     </>
   );
