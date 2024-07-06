@@ -1,7 +1,7 @@
-type CommentAdded @entity(immutable: true) {
+type Comment @entity {
   id: Bytes!
-  commenter: Bytes! # address
-  postId: BigInt! # uint256
+  commenter: User! @derivedFrom(field: "comments")
+  post: Post!
   content: String! # string
   timestamp: BigInt! # uint256
   blockNumber: BigInt!
@@ -9,31 +9,45 @@ type CommentAdded @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type PostCreated @entity(immutable: true) {
+type Post @entity {
   id: Bytes!
-  author: Bytes! # address
+  author: User! @derivedFrom(field: "posts")
   content: String! # string
   timestamp: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
-  comments: [Comment!]! @derivedFrom(field: "PostCreated")
+  comments: [Comment!]! @derivedFrom(field: "post")
+  likes: [PostLiked!]! @derivedFrom(field: "post")
 }
 
-type PostLiked @entity(immutable: true) {
+type PostLiked @entity {
   id: Bytes!
-  liker: Bytes! # address
-  postId: BigInt! # uint256
+  liker: User! @derivedFrom(field: "likes")
+  post: Post!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
 
-type UserRegistered @entity(immutable: true) {
+type User @entity {
   id: Bytes!
   userAddress: Bytes! # address
   username: String! # string
+  posts: [Post!]! @derivedFrom(field: "author")
+  comments: [Comment!]! @derivedFrom(field: "commenter")
+  likes: [PostLiked!]! @derivedFrom(field: "liker")
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
+}
+
+type Query {
+  postsByUser(userAddress: Bytes!): [Post!]!
+  commentsByPost(postId: Bytes!): [Comment!]!
+  mostLikedPosts(limit: Int!): [Post!]!
+}
+
+schema {
+  query: Query
 }
