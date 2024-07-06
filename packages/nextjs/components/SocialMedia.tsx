@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { ethers } from "ethers";
+import { motion } from "framer-motion";
+import { FaComment, FaPlus, FaThumbsUp, FaUserPlus } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { useAccount } from "wagmi";
 import deployedContracts from "~~/contracts/deployedContracts";
@@ -251,7 +253,8 @@ const SocialMedia = () => {
                   onChange={e => setUsername(e.target.value)}
                 />
               </div>
-              <button className="bg-blue-500 text-white px-4 py-2 rounded-lg" onClick={Register}>
+              <button className="bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center" onClick={Register}>
+                <FaUserPlus className="mr-2" />
                 Register
               </button>
             </div>
@@ -274,7 +277,8 @@ const SocialMedia = () => {
                   onChange={e => setContent(e.target.value)}
                 ></textarea>
               </div>
-              <button className="bg-blue-500 text-white px-4 py-2 rounded-lg" onClick={CreatePost}>
+              <button className="bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center" onClick={CreatePost}>
+                <FaPlus className="mr-2" />
                 Create Post
               </button>
             </div>
@@ -287,7 +291,13 @@ const SocialMedia = () => {
         <h3 className="text-2xl font-semibold mb-4">All Posts</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {posts.map((post: any, index: number) => (
-            <div className="mb-3" key={index}>
+            <motion.div
+              className="mb-3"
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+            >
               <div className="bg-white shadow rounded-lg p-4">
                 <div className="mb-4">
                   <h6 className="text-sm font-medium text-gray-500">Author: {post.author.toString()}</h6>
@@ -302,9 +312,10 @@ const SocialMedia = () => {
                 {registeredUser && (
                   <>
                     <button
-                      className="bg-blue-500 text-white px-4 py-2 rounded-lg m-2"
+                      className="bg-blue-500 text-white px-4 py-2 rounded-lg m-2 flex items-center"
                       onClick={() => like(BigInt(index))}
                     >
+                      <FaThumbsUp className="mr-2" />
                       Like
                     </button>
                     <input
@@ -315,9 +326,10 @@ const SocialMedia = () => {
                       onChange={e => handleCommentChange(index, e.target.value)}
                     />
                     <button
-                      className="bg-gray-500 text-white px-4 py-2 rounded-lg"
+                      className="bg-gray-500 text-white px-4 py-2 rounded-lg flex items-center"
                       onClick={() => AddComment(BigInt(index), commentText[index] || "")}
                     >
+                      <FaComment className="mr-2" />
                       Comment
                     </button>
                   </>
@@ -337,7 +349,7 @@ const SocialMedia = () => {
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

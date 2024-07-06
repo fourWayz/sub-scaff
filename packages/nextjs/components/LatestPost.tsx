@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+import { motion } from "framer-motion";
 import { FaCalendarAlt, FaRegComment, FaUser } from "react-icons/fa";
 
 const LatestPost = () => {
@@ -42,20 +43,26 @@ const LatestPost = () => {
       .catch(error => {
         console.error("Error fetching data:", error);
       });
-  });
+  }, []);
 
   return (
     <div className="mt-3" style={{ margin: "20px" }}>
       <h3 className="text-2xl font-semibold mb-4">Latest Posts</h3>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {latestPosts?.map((post: any, index: number) => (
-          <div className="mb-3" key={index}>
+          <motion.div
+            className="mb-3"
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+          >
             <div className="bg-white shadow rounded-lg p-4">
               <Image
                 src={`https://picsum.photos/seed/${post.id}/300/200`}
                 alt="Random"
                 width={300}
-                height={300}
+                height={200}
                 className="w-full h-40 object-cover rounded mb-4"
               />
               <div className="mb-4 flex items-center">
@@ -80,7 +87,7 @@ const LatestPost = () => {
                 Check on Etherscan
               </button>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>
