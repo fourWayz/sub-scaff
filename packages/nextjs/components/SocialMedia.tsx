@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
+import { useLogin } from "@privy-io/react-auth";
 import { ethers } from "ethers";
 import { motion } from "framer-motion";
-import { FaComment, FaPlus, FaThumbsUp, FaUserPlus } from "react-icons/fa";
+import { FaComment, FaLink, FaPlus, FaThumbsUp, FaUserPlus } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { useAccount } from "wagmi";
 import deployedContracts from "~~/contracts/deployedContracts";
@@ -21,7 +22,9 @@ const SocialMedia = () => {
   const [content, setContent] = useState("");
   const [posts, setPosts] = useState<any>([]);
   const [registeredUser, setRegisteredUser] = useState<undefined | string>(undefined);
+  const [socialAccount, setSocialAccount] = useState({ username: "", type: "" });
   const [commentText, setCommentText] = useState<{ [key: number]: string }>({}); // State for comment text
+  const [showModal, setShowModal] = useState(false);
 
   // const contractABI = deployedContracts[31337].Social.abi; // hardhat
   // const contractAddress = deployedContracts[31337].Social.address; // hardhat
@@ -34,11 +37,21 @@ const SocialMedia = () => {
   const { writeContractAsync: likePost } = useScaffoldWriteContract("Social");
   const { writeContractAsync: addComment } = useScaffoldWriteContract("Social");
 
-  // const { data: AllPosts } = useScaffoldReadContract({
-  //   contractName: "Social",
-  //   functionName: "getAllPosts"
-  // });
+  const handleLoginComplete = (linkedAccount: any) => {
+    console.log(linkedAccount);
+    const username = linkedAccount?.username || linkedAccount?.name;
+    if (username) {
+      localStorage.setItem("socialAccount", JSON.stringify({ username, type: linkedAccount.type }));
+      setSocialAccount({ username, type: linkedAccount.type });
+    }
+  };
 
+  const { login } = useLogin({
+    onComplete: handleLoginComplete,
+    onError: error => {
+      console.log(error);
+    },
+  });
   const { data: PostsCount } = useScaffoldReadContract({
     contractName: "Social",
     functionName: "getPostsCount",
@@ -48,8 +61,15 @@ const SocialMedia = () => {
 
   // fetch registered user onMount
   useEffect(() => {
+    const storedSocialAccount = localStorage.getItem("socialAccount");
+    // console.log(storedSocialAccount)
+    if (storedSocialAccount) {
+      setSocialAccount(JSON.parse(storedSocialAccount));
+      console.log(storedSocialAccount);
+    }
+
     fetchRegisteredUser();
-  });
+  }, []);
 
   /**
    * Registers a new user.
@@ -220,6 +240,11 @@ const SocialMedia = () => {
     }));
   };
 
+  const handleSocialLogin = () => {
+    login();
+    setShowModal(false);
+  };
+
   return (
     <div className="container mx-auto mt-5">
       {/* navbar section */}
@@ -231,6 +256,7 @@ const SocialMedia = () => {
           <div className="flex space-x-4">
             {registeredUser && (
               <div className="nav-item">
+                <p className="font-bold text-blue-500"> {socialAccount.username && `(${socialAccount.username})`}</p>
                 {/* <button disabled className="btn btn-warning"> {registeredUser.userAddress.slice(0, 6)}...</button> */}
               </div>
             )}
@@ -262,28 +288,84 @@ const SocialMedia = () => {
         </div>
       )}
 
-      {/* create post section */}
+      {/* create post section and socila link */}
       {registeredUser && (
-        <div className="mt-3 flex justify-center">
-          <div className="w-full md:w-1/2">
-            <div className="bg-white shadow rounded-lg p-6">
-              <h5 className="text-lg font-semibold mb-4">Create Post</h5>
-              <div className="mb-3">
-                <textarea
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-                  rows={3}
-                  placeholder="Content"
-                  value={content}
-                  onChange={e => setContent(e.target.value)}
-                ></textarea>
-              </div>
-              <button className="bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center" onClick={CreatePost}>
-                <FaPlus className="mr-2" />
-                Create Post
-              </button>
+        <>
+          <div className="mt-3 flex justify-center">
+            <div className="w-full md:w-1/2">
+              {!socialAccount.username && (
+                <div className="bg-white shadow rounded-lg p-6">
+                  <h5 className="text-lg font-semibold mb-4">Link Social Account</h5>
+                  <button
+                    className="bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center mt-2"
+                    onClick={() => setShowModal(true)}
+                  >
+                    <FaLink className="mr-2" />
+                    Link Social
+                  </button>
+                </div>
+              )}
             </div>
           </div>
-        </div>
+
+          <div className="mt-3 flex justify-center">
+            <div className="w-full md:w-1/2">
+              <div className="bg-white shadow rounded-lg p-6">
+                <h5 className="text-lg font-semibold mb-4">Create Post</h5>
+                <div className="mb-3">
+                  <textarea
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                    rows={3}
+                    placeholder="Content"
+                    value={content}
+                    onChange={e => setContent(e.target.value)}
+                  ></textarea>
+                </div>
+                <button className="bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center" onClick={CreatePost}>
+                  <FaPlus className="mr-2" />
+                  Create Post
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {showModal && (
+            <div className="fixed inset-0 z-50 overflow-auto bg-smoke-light flex">
+              <div className="relative p-8 bg-white w-full max-w-md m-auto flex-col flex rounded-lg shadow-lg">
+                <div className="flex justify-between items-center pb-3">
+                  <p className="text-2xl font-bold">Select Social Account</p>
+                  <div className="cursor-pointer z-50" onClick={() => setShowModal(false)}>
+                    <svg
+                      className="fill-current text-black"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                    >
+                      <path d="M14.53 3.47a.75.75 0 0 0-1.06 0L9 7.94 4.53 3.47a.75.75 0 0 0-1.06 1.06L7.94 9 3.47 13.47a.75.75 0 0 0 1.06 1.06L9 10.06l4.47 4.47a.75.75 0 0 0 1.06-1.06L10.06 9l4.47-4.47a.75.75 0 0 0 0-1.06z" />
+                    </svg>
+                  </div>
+                </div>
+                <div className="mt-3">
+                  <button
+                    className="bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center m-2"
+                    onClick={() => handleSocialLogin()}
+                  >
+                    <FaLink className="mr-2" />
+                    Link GitHub
+                  </button>
+                  <button
+                    className="bg-gray-500 text-white px-4 py-2 rounded-lg flex items-center m-2"
+                    onClick={() => handleSocialLogin()}
+                  >
+                    <FaLink className="mr-2" />
+                    Link Google
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </>
       )}
 
       {/* post section */}
